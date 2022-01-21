@@ -2,16 +2,16 @@
 
 pkg.install() {
     if ! utils.cmd_exists docker; then
-        case "$(uname -rs)" in
-            Darwin*)
+        case $(os.platform) in
+            osx)
                 if utils.cmd_exists brew; then
                     brew install --cask docker;
                 fi
                 ;;
-            *WSL2|*-microsoft-standard)
+            wsl2)
                 choco install docker-desktop;
                 ;;
-            Linux*)
+            linux)
                 if utils.cmd_exists apt-get; then
                     sudo apt-get -y update;
                     sudo apt-get -y install \
